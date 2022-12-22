@@ -111,9 +111,9 @@ class Treap {
       return (k == p->l->c + 1) ? p->x : kth(p->r, k - p->l->c - 1);
   }
 
-  void ins(int x) { ins(root, x); }
+  void insert(int x) { ins(root, x); }
 
-  void del(int x) { del(root, x); }
+  void delete(int x) { del(root, x); }
 
   bool find(int x) { return find(root, x); }
 
