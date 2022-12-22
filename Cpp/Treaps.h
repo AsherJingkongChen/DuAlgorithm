@@ -1,5 +1,6 @@
 #pragma once
 #include "common.h"
+#include <climits>
 
 /// <summary>
 /// The treap and the randomized binary search tree are two closely related
@@ -111,9 +112,9 @@ class Treap {
       return (k == p->l->c + 1) ? p->x : kth(p->r, k - p->l->c - 1);
   }
 
-  void insert(int x) { ins(root, x); }
+  void ins(int x) { ins(root, x); }
 
-  void delete(int x) { del(root, x); }
+  void del(int x) { del(root, x); }
 
   bool find(int x) { return find(root, x); }
 
