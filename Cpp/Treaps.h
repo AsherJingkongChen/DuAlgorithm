@@ -17,7 +17,7 @@ class Treap {
     T x;
     int y, c;
     Node *l, *r;
-    Node(int data = 0) : x(data), c(0), l(0), r(0) {
+    Node(T const &data) : x(data), c(0), l(0), r(0) {
       y = ((rand() << 15) + rand()) % MOD_MAX;
     }
   };
@@ -25,7 +25,7 @@ class Treap {
 
  public:
   Treap() {
-    dummy = new Node();
+    dummy = new Node(T());
     dummy->l = dummy->r = dummy;
     dummy->y = INT_MAX;
     root = dummy;
@@ -57,7 +57,7 @@ class Treap {
     p = q;
   }
 
-  void ins(Node *&p, int x) {
+  void ins(Node *&p, T const &x) {
     if (p == dummy) {
       p = new Node(x);
       p->l = p->r = dummy;
@@ -72,7 +72,7 @@ class Treap {
     update(p);
   }
 
-  void del(Node *&p, int x) {
+  void del(Node *&p, T const &x) {
     if (p == dummy) return;
     if (p->x == x)
       del(p);
@@ -99,24 +99,24 @@ class Treap {
     update(p);
   }
 
-  bool find(Node *&p, int x) {
+  bool find(Node *&p, T const &x) {
     if (p == dummy) return false;
     if (x == p->x) return true;
     return (x < p->x) ? find(p->l, x) : find(p->r, x);
   }
 
-  int kth(Node *&p, int k) {
+  T const &kth(Node *&p, int k) {
     if (k <= p->l->c)
       return kth(p->l, k);
     else
       return (k == p->l->c + 1) ? p->x : kth(p->r, k - p->l->c - 1);
   }
 
-  void ins(int x) { ins(root, x); }
+  void ins(T const &x) { ins(root, x); }
 
-  void del(int x) { del(root, x); }
+  void del(T const &x) { del(root, x); }
 
-  bool find(int x) { return find(root, x); }
+  bool find(T const &x) { return find(root, x); }
 
-  int kth(int k) { return (k >= 1 && k <= root->c) ? kth(root, k) : -1; }
+  T const &kth(int k) { return (k >= 1 && k <= root->c) ? kth(root, k) : -1; }
 };
